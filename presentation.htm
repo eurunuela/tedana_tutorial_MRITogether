@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="@@base@@" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="engine/main.css" />
+    <link rel="stylesheet" href="theme/vancouver.css" />
+    <link rel="stylesheet" href="engine/katex/katex.min.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+    :root{
+--logo: /assets/200611_spin_imagotipo_negativo.png;
+--darkaccent1color: #A7987C;
+--lightaccent1color: #A7987C;
+--accent2: #43aa8b;
+--accent3: #f9c74f;
+--accent4: #90be6d;
+--accent5: #f8961e;
+--accent6: #577590;
+--lighttitletextcolor: #ffffffEE;
+--darktitletextcolor: #000000EE;
+--lightbodytextcolor: #ffffffEE;
+--darkbodytextcolor: #000000EE;
+--lightbackgroundcolor: transparent;
+--darkbackgroundcolor: transparent;
+--bodyfont: Montserrat;
+--titlefont: Montserrat;
+} 
+
+    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="engine/print.css"
+      media="print"
+    />
+  </head>
+
+  <body class="responsive">
+    <div class="reveal">
+      <div class="slides"><section class="variable-size-headings has-footer dark section-container present has-dark-background fitted" data-background-color="#4d4036" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="denoisingofmulti-echofmridatawithtedana">Denoising of multi-echo fMRI data with tedana</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">1</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#534137" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/qr.png" class=" size-contain position-center-center"></div><p></p>
+
+<h3 id="slidesavailableonline">Slides available online</h3></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">2</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#5a4238" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="createacondaormambaenvironment">Create a conda or mamba environment</h3>
+
+<p>As simple as:</p>
+
+<pre><code class="bash hljs">$ mamba create -p ~/conda_envs/MRITogether python=3.8
+$ <span class="hljs-built_in">source</span> activate ~/conda_envs/MRITogether
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">3</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#61443a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="installtedana">Install tedana</h3>
+
+<p>As simple as:</p>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ pip install tedana
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">4</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#68453b" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="checkwereonthelatestversion">Check we’re on the latest version</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ tedana --version
+tedana v0.0.12
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">5</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#6f473d" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="createdatafolder">Create data folder</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ mkdir ~/MRITogether
+$ <span class="hljs-built_in">cd</span> ~/MRITogether
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">6</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#725045" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/osf_screenshot.png" class=" size-contain position-center-center"></div><p></p>
+
+<p>Data: <a href="https://osf.io/9wcb8/">https://osf.io/9wcb8/</a></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">7</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#725e52" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/download_data.png" class=" size-contain position-center-center"></div><p></p>
+
+<h4 id="downloadsubjectdataaszip">Download subject data as zip</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">8</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#726c5e" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="movedataandunzip">Move data and unzip</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ mv ~/Downloads/sub-04570.zip .
+$ unzip sub-04570.zip
+$ rm -rf sub-04570.zip
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">9</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-dark-background fitted" data-background-color="#72796b" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="whatdowehavehere">What do we have here?</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ ls -lah
+total 0
+drwxr-xr-x   6 eurunuela  staff   192B Dec  1 15:27 .
+drwxr-x---+ 76 eurunuela  staff   2.4K Dec  1 15:27 ..
+drwxr-xr-x  19 eurunuela  staff   608B Dec  1 15:26 anat
+drwxr-xr-x  14 eurunuela  staff   448B Dec  1 15:26 figures
+drwxr-xr-x  11 eurunuela  staff   352B Dec  1 15:26 func
+drwxr-xr-x   3 eurunuela  staff    96B Dec  1 15:26 <span class="hljs-built_in">log</span>
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">10</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present fit-warning has-dark-background fitted" data-background-color="#728777" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><p><br></p>
+
+<pre><code class="bash hljs">$ ls -lah func/
+total 384520
+drwxr-xr-x  11 eurunuela  staff   352B Dec  1 15:26 .
+drwxr-xr-x   6 eurunuela  staff   192B Dec  1 15:27 ..
+-rw-------   1 eurunuela  staff   151K Dec  1 14:15 sub-04570_task-rest_desc-confounds_timeseries.json
+-rw-------   1 eurunuela  staff   509K Dec  1 14:15 sub-04570_task-rest_desc-confounds_timeseries.tsv
+-rw-------   1 eurunuela  staff    49M Dec  1 14:15 sub-04570_task-rest_echo-1_space-scanner_desc-partialPreproc_bold.nii.gz
+-rw-------   1 eurunuela  staff    47M Dec  1 14:14 sub-04570_task-rest_echo-2_space-scanner_desc-partialPreproc_bold.nii.gz
+-rw-------   1 eurunuela  staff    46M Dec  1 14:14 sub-04570_task-rest_echo-3_space-scanner_desc-partialPreproc_bold.nii.gz
+-rw-------   1 eurunuela  staff    45M Dec  1 14:14 sub-04570_task-rest_echo-4_space-scanner_desc-partialPreproc_bold.nii.gz
+-rw-------   1 eurunuela  staff   247B Dec  1 14:14 sub-04570_task-rest_from-T1w_to-scanner_mode-image_xfm.txt
+-rw-------   1 eurunuela  staff   247B Dec  1 14:14 sub-04570_task-rest_from-scanner_to-T1w_mode-image_xfm.txt
+-rw-------   1 eurunuela  staff   3.4K Dec  1 14:14 sub-04570_task-rest_space-scanner_desc-brain_mask.nii.gz
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">11</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark section-container present has-light-background fitted" data-background-color="#749381" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="wearereadytogo">We are ready to go!</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">12</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark default-container present has-light-background fitted" data-background-color="#799580" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="thetedanacommand">The tedana command</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ tedana -d func/sub-04570_task-rest_echo-1_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-2_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-3_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-4_space-scanner_desc-partialPreproc_bold.nii.gz -e 12 28 44 60 --mask func/sub-04570_task-rest_space-scanner_desc-brain_mask.nii.gz --out-dir tedana --tedpca mdl --prefix sub-04570_task-rest_space-scanner --fittype curvefit --verbose
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">13</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-light-background fitted" data-background-color="#7e987e" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="let’schecktheoutputs">Let’s check the outputs</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ ls
+anat    figures func    <span class="hljs-built_in">log</span>     tedana
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">14</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark v-split-container present has-light-background fitted" data-background-color="#839a7c" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="wegetabunchoffiles">We get a bunch of files</h3>
+
+<p><code class="hljs powershell"><span class="hljs-variable">$</span> <span class="hljs-built_in">ls</span> tedana</code></p>
+
+<ul>
+<li><span class="math katex-rendered"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">S_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8333em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.0576em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.3011em;"><span class="" style="top: -2.55em; margin-left: -0.0576em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span> and <span class="math katex-rendered"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>T</mi><mn>2</mn><mo>∗</mo></msubsup></mrow><annotation encoding="application/x-tex">T_2^*</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.9368em; vertical-align: -0.2481em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.6887em;"><span class="" style="top: -2.4519em; margin-left: -0.1389em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2481em;"><span class=""></span></span></span></span></span></span></span></span></span></span> maps</li>
+<li>PCA and ICA metrics</li>
+<li>Optimally combined data</li>
+<li>Each of the echoes</li>
+<li>A mask of the good data</li>
+<li>A folder with component figures</li>
+</ul></div>
+        <img src="images/tedana_outputs.png" class=" size-contain position-center-center" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">15</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark v-split-container present has-light-background fitted" data-background-color="#889d7a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 1rem;">
+        <img src="images/tedana_json.png" class=" size-contain position-center-center" style="">
+        <img src="images/tedana_log.png" class=" size-contain position-center-center" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">16</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark section-container present has-light-background fitted" data-background-color="#8d9f79" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="automaticclassificationoficacomponentsisnotperfect">Automatic classification of ICA components is not perfect</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">17</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark full-image-container present has-light-background fitted" data-background-color="#919d76" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/metrics_table.png" class=" position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">18</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark cover-container present has-light-background fitted" data-background-color="#969b74" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="rica">Rica</h1>
+
+<h3 id="easyfastwaytovisualizeandclassifycomponents">Easy, fast way to visualize and classify components</h3></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">19</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark title-container present has-light-background fitted" data-background-color="#9a9871" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h2 id="rica-fmri.netlify.app"><a href="rica-fmri.netlify.app">rica-fmri.netlify.app</a></h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">20</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark section-container present has-light-background fitted" data-background-color="#9e956e" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="ifyoudowebdevandwanttocontributedmme🙏">If you do web dev and want to contribute, DM me! 🙏</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">21</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark section-container present has-light-background fitted" data-background-color="#a3926b" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="ricamakesiteasytoruntedanawithourmanualclassification">Rica makes it easy to run tedana with our manual classification</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">22</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark default-container present has-light-background fitted" data-background-color="#a3906b" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="tedanawithmanualclassification">tedana with manual classification</h3>
+
+<p><br></p>
+
+<pre><code class="bash hljs">$ tedana -d func/sub-04570_task-rest_echo-1_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-2_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-3_space-scanner_desc-partialPreproc_bold.nii.gz func/sub-04570_task-rest_echo-4_space-scanner_desc-partialPreproc_bold.nii.gz -e 12 28 44 60 --mask func/sub-04570_task-rest_space-scanner_desc-brain_mask.nii.gz --out-dir tedana_manual --prefix sub-04570_task-rest_space-scanner --verbose --t2smap tedana/sub-04570_task-rest_space-scanner_T2starmap.nii.gz --mix tedana/sub-04570_task-rest_space-scanner_desc-ICA_mixing.tsv --ctab tedana/manual_classification.tsv
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">23</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark grid-container present has-light-background fitted" data-background-color="#9d8d70" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-0" style="width: 100%; font-size: 1rem;">
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">24</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark section-container present has-light-background fitted" data-background-color="#968b75" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="differentlevelsofdenoising">Different levels of denoising</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">25</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+</section><section class="variable-size-headings has-footer dark default-container present fit-warning has-light-background fitted" data-background-color="#90887a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><pre><code class="python hljs"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> nilearn <span class="hljs-keyword">import</span> masking
+
+<span class="hljs-comment"># For this, you need the mixing matrix, the data you're denoising,</span>
+<span class="hljs-comment"># a brain mask, and an index of "bad" components</span>
+data_file = <span class="hljs-string">"preprocessed_data.nii.gz"</span>
+mixing_file = <span class="hljs-string">"mixing.tsv"</span>
+mask_file = <span class="hljs-string">"mask.nii.gz"</span>
+den_idx = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+
+<span class="hljs-comment"># Load the mixing matrix</span>
+mixing_df = pd.read_table(mixing_file, index_col=<span class="hljs-string">"component"</span>)
+mixing = mixing_df.data
+
+<span class="hljs-comment"># Apply the mask to the data image to get a 2d array</span>
+data = masking.apply_mask(data_file, mask_file)
+
+<span class="hljs-comment"># Transpose to voxels-by-time</span>
+data = data.T
+
+<span class="hljs-comment"># The first dimension should be time</span>
+<span class="hljs-keyword">assert</span> data.shape[<span class="hljs-number">1</span>] == mixing.shape[<span class="hljs-number">0</span>]
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">26</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section><section class="variable-size-headings has-footer dark default-container present has-light-background fitted" data-background-color="#8a867f" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/qr.png" class=" size-contain position-center-center"></div><p></p>
+
+<h1 id="thankyou">Thank you!</h1>
+
+<p>Get in touch <a href="https://twitter.com/eurunuela">@eurunuela</a> or <a href="mailto:e.urunuela@bcbl.eu">e.urunuela@bcbl.eu</a></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">27</div><div class="middle">enekourunuela.com</div><div class="trailing"><img class="logo" src="images/200611_spin_imagotipo_negativo.png"></div></div>
+      
+</section></div>
+    </div>
+    <script src="engine/index.js"></script>
+    <script src="engine/d3v4.min.js" charset="utf-8"></script>
+    <script src="engine/charts.min.js" charset="utf-8"></script>
+    <script src="engine/billboard.min.js"></script>
+    <script>
+      Reveal.configure({
+        progress: true,
+        keyboard: true,
+        dependencies: [
+          {
+            src: "engine/highlight.js",
+            sync: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
